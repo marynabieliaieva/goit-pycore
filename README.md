@@ -5,3 +5,4 @@
 | Папка | Тема |
 | --- | --- |
 | [goit-pycore-hw-03](goit-pycore-hw-03) | Тема 4. Модулі datetime, random, регулярні вирази, дні народження колег |
+| [goit-pycore-hw-06](goit-pycore-hw-06) | Тема 9. ООП: класи адресної книги (Field, Name, Phone, Record, AddressBook) |
