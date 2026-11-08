@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "personal-assistant"
+version = "1.0.0"
+description = "Command-line Personal Assistant: contacts with birthdays and notes with tags"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Marina Beljajeva" }]
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Environment :: Console",
+]
+
+[project.scripts]
+personal-assistant = "personal_assistant.main:main"
+assistant = "personal_assistant.main:main"
+
+[tool.setuptools]
+packages = ["personal_assistant"]
+
+[tool.black]
+line-length = 79
