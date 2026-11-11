@@ -1,8 +1,10 @@
+import re
 from collections import UserDict
 from datetime import date, datetime, timedelta
 from typing import Dict, List, Optional
 
 DATE_FORMAT = "%d.%m.%Y"  # DD.MM.YYYY
+DATE_PATTERN = re.compile(r"\d{2}\.\d{2}\.\d{4}")  # exactly DD.MM.YYYY
 
 
 class Field:
@@ -37,6 +39,9 @@ class Birthday(Field):
     """Birthday stored as a date; created from a 'DD.MM.YYYY' string."""
 
     def __init__(self, value: str):
+        # strptime alone also accepts "1.1.2000", so check the exact shape first
+        if not (isinstance(value, str) and DATE_PATTERN.fullmatch(value)):
+            raise ValueError("Invalid date format. Use DD.MM.YYYY")
         try:
             birthday = datetime.strptime(value, DATE_FORMAT).date()
         except (TypeError, ValueError):

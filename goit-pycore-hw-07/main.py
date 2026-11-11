@@ -49,16 +49,15 @@ def get_record(book: AddressBook, name: str) -> Record:
 
 @input_error
 def add_contact(args: List[str], book: AddressBook) -> str:
-    require_args(args, 1, "add [name] [phone]")
-    name, *rest = args
-    phone = rest[0] if rest else None
+    # Both the name and the phone are required
+    require_args(args, 2, "add [name] [phone]")
+    name, phone, *_ = args
     record = book.find(name)
     message = "Contact updated."
     if record is None:
         record = Record(name)
         message = "Contact added."
-    if phone:
-        record.add_phone(phone)  # validated before the contact is saved
+    record.add_phone(phone)  # validated before the contact is saved
     book.add_record(record)
     return message
 
@@ -81,7 +80,7 @@ def show_phone(args: List[str], book: AddressBook) -> str:
 
 
 @input_error
-def show_all(book: AddressBook) -> str:
+def show_all(args: List[str], book: AddressBook) -> str:
     return str(book)
 
 
@@ -138,7 +137,7 @@ def main() -> None:
             print(show_phone(args, book))
 
         elif command == "all":
-            print(show_all(book))
+            print(show_all(args, book))
 
         elif command == "add-birthday":
             print(add_birthday(args, book))
